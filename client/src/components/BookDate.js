@@ -356,7 +356,7 @@ function BookDate() {
                         <div class="p-3 ms-3 mt-2 rounded bg-secondary"></div>
                     </td>
                     <td colSpan={5}>
-                        <p class="ms-1 mt-4 text-start align-middle form-text font-monospace">- dostępna data</p>
+                        <p class="ms-1 mt-4 text-start align-middle form-text font-monospace">- dostępny termin</p>
                     </td>
                 </tr>
                 <tr>
@@ -364,7 +364,7 @@ function BookDate() {
                         <div class="p-3 ms-3 rounded bg-success"></div>
                     </td>
                     <td colSpan={5}>
-                        <p class="ms-1 mt-3 text-start align-middle form-text font-monospace">- wybrana data</p>
+                        <p class="ms-1 mt-3 text-start align-middle form-text font-monospace">- wybrany termin</p>
                     </td>
                 </tr>
                 <tr>
@@ -372,7 +372,7 @@ function BookDate() {
                         <div class="p-3 ms-3 rounded bg-body-tertiary border border-secondary"></div>
                     </td>
                     <td colSpan={5}>
-                        <p class="ms-1 mt-3 text-start align-middle form-text font-monospace">- niedostępna data</p>
+                        <p class="ms-1 mt-3 text-start align-middle form-text font-monospace">- termin niedostępny</p>
                     </td>
                 </tr>
             </table>
