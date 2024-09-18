@@ -4,18 +4,38 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const SpotifyWebApi = require('spotify-web-api-node');
 
+
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 // Initialize the global state to store access and refresh tokens
-app.locals.code = "AQAWXB2Zv29AXpugOT1rJAYUmXetW1h2VMq2wB9pB9J2ufrx2Oj2t48lv-lxtGSEtfTp4kI2hSEhUvltpZNovj6aP7n1wRWHFTQtCXg30Wacn7AlN95QY5NE_hg_W5DkPirguI9AxcgFRFYeeyqYrLsFNqlHV0fNXTeLkQtGbQJ9MPVRYkjuQo4XzpsH3Cta5LlGIbYdBKDGt1J2ekiW8T1CGH4UW-BXqFeUp-mLyBR8Np-3g-kVNUKET8hSZhQN4nMA_8GT-n54kRy2XZinaFMNMNnkWcErgYs3VADK-A4pxnE1NG8Q76n4FTvxVG4dt1i7ZkgjbIGZKfC_5dpbKmbY-4C53w";
+app.locals.code = "AQCXb-Tz7BEmoidjSArqsJnvetWcQk2Yh-6oJIDC4vVCy60tGBnH0BeDqJfKvH8rEXMMuHJILgQjxH9oKW4tsIMNdZg48VkZjNLbfQrxNDQz5zjnGphdDvdH6GgX9kNywMeb_saORiyOsX6SZUUT_2J6-IjoxVKw-dMYe5SomdSCbgGBUpqYODex0neghqH5VnYtJVEpLvqmqaxNl69jVC6_-lL6u478R0GRVRBuzr9GEQQf87jsBlePgPOY7G3BDRnnZnfZEBzqeLdFLoTP_TxvWuK2fjNYpndgr-ry2R30zXnzqwm8zWw-0uVMNDXAVsQyB73tRQMrrgIlFd4ed6QK2mSBKdTZg68fozQx2Y8DCcz1NmcAAIexqLxkTMeKAiu_";
 app.locals.accessToken = "";
 app.locals.refreshToken = "";
 app.locals.expiresIn = 0;
 
+//declare spotifyApi
+const spotifyApi = new SpotifyWebApi({
+  redirectUri: process.env.REDIRECT_URI,
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+});
+
+//declare track state
+let currentSong = "";
+let currentSongImage = "";
+let currentSongAuthor = "";
+
+
+
+
+app.get('/login', (req, res) => {
+  res.redirect(spotifyApi.createAuthorizeURL(['user-read-private', 'user-read-email'], 'state'));
+});
+
 // Function to refresh the access token
-function refreshAccessToken(spotifyApi) {
+function refreshAccessToken() {
   spotifyApi.refreshAccessToken()
     .then((data) => {
       app.locals.accessToken = data.body.access_token;
@@ -27,10 +47,10 @@ function refreshAccessToken(spotifyApi) {
       
       // Set the new access token on the Spotify API client
       spotifyApi.setAccessToken(data.body.access_token);
-      spotifyApi.setRefreshToken(data.body.refresh_token);
+      //spotifyApi.setRefreshToken(data.body.refresh_token);
       
       // Schedule the next token refresh slightly before the token actually expires
-      setTimeout(() => refreshAccessToken(spotifyApi), (data.body.expires_in - 300) * 1000); // Refresh 5 minutes before expiry
+      setTimeout(() => refreshAccessToken(), (app.locals.expiresIn - 300) * 1000); // Refresh 5 minutes
     })
     .catch((err) => {
       console.error('Could not refresh access token', err);
@@ -39,11 +59,6 @@ function refreshAccessToken(spotifyApi) {
 
 function getAccessToken() {
   const code = app.locals.code;
-  const spotifyApi = new SpotifyWebApi({
-    redirectUri: process.env.REDIRECT_URI,
-    clientId: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRET,
-  });
 
   spotifyApi.authorizationCodeGrant(code).then((data) => {
     app.locals.accessToken = data.body.access_token;
@@ -56,7 +71,8 @@ function getAccessToken() {
     spotifyApi.setRefreshToken(data.body.refresh_token);
 
     // Schedule the token refresh just before it expires
-    setTimeout(() => refreshAccessToken(spotifyApi), 5 * 1000); // Refresh 5 minutes before expiry
+    setTimeout(() => refreshAccessToken(), (app.locals.expiresIn - 300) * 1000); // Refresh 5 minutes before expiry
+    getCurrentlyPlaying();
   })
   .catch((err) => {
     console.error(err);
@@ -64,7 +80,45 @@ function getAccessToken() {
   });
 }
 
+
+
+//function to get currently played song title, image, author and time to an end and display it in console. Call this function again when song ends
+function getCurrentlyPlaying() {
+  spotifyApi.getMyCurrentPlayingTrack()
+    .then((data) => {
+      if (data.body.is_playing) {
+        //save currently playing song to variable
+        currentSong = data.body.item.name;
+        currentSongImage = data.body.item.album.images[0].url;
+        currentSongAuthor = data.body.item.artists[0].name;
+
+        console.log('Now playing:', currentSong);
+        console.log('Song ends in:', data.body.item.duration_ms - data.body.progress_ms, 'ms');
+        console.log('Song author:', currentSongAuthor);
+        console.log('Song image:', currentSongImage);
+
+        setTimeout(() => getCurrentlyPlaying(), data.body.item.duration_ms - data.body.progress_ms + 5000);
+      } else {
+        console.log('Nothing currently playing.');
+        setTimeout(() => getCurrentlyPlaying(), 10000);
+      }
+    })
+    .catch((err) => {
+      console.error('Could not get currently playing song', err);
+      setTimeout(() => getCurrentlyPlaying(), 10000);
+    });
+}
+
+
+//send currently playing song to user when requested
+app.get('/currentSong', (req, res) => {
+  res.json({ currentSong, currentSongImage, currentSongAuthor });
+});
+
+
+
+
 app.listen(3002, () => {
   console.log('Server running on http://localhost:3002');
-  getAccessToken()
+  getAccessToken();
 });
