@@ -1,9 +1,9 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Carousel from 'react-bootstrap/Carousel';
 import { Link } from "react-router-dom";
 
 import Navbar from '../components/Navbar';
+import WhatsPlaying from '../components/WhatsPlaying';
 
 const linkStyle = {
     textDecoration: "none"
@@ -15,12 +15,10 @@ function Home() {
             <Navbar />
 
             <div class="mb-5">
-                
             </div>
 
             <div class="p-5">
-                <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                </div>
+                <WhatsPlaying />
             </div>
 
             <div class="container-fluid px-5 marketing text-center">
