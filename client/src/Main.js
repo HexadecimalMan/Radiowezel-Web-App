@@ -6,8 +6,9 @@ import SongRequests from './pages/SongRequests.js'
 import Shoutouts from './pages/Shoutouts.js'
 import About from './pages/About.js'
 import News from './pages/News.js'
+import Schedule from './pages/Schedule.js'
 
-import Dashboard_Login from './dashboard/Login.js'
+import Login from './dashboard/Login.js'
 import Dashboard_Home from './dashboard/Home.js'
 import Dashboard_SongRequests from './dashboard/SongRequests.js'
 import Dashboard_Shoutouts from './dashboard/Shoutouts.js'
@@ -23,7 +24,9 @@ const Main = () => {
       <Route exact path='/dedykacje' element={<Shoutouts/>}></Route>
       <Route exact path='/o-nas' element={<About/>}></Route>
       <Route exact path='/aktualnosci' element={<News/>}></Route>
-      <Route exact path='/dashboard/login' element={<Dashboard_Login/>}></Route>
+      <Route exact path='/ramowka' element={<Schedule/>}></Route>
+      <Route exact path='/login' element={<Login/>}></Route>
+      <Route exact path='/dashboard/' element={<Dashboard_Home/>}></Route>
       <Route exact path='/dashboard/song-requests' element={<Dashboard_SongRequests/>}></Route>
       <Route exact path='/dashboard/shoutouts' element={<Dashboard_Shoutouts/>}></Route>
       <Route exact path='/dashboard/about' element={<Dashboard_About/>}></Route>
