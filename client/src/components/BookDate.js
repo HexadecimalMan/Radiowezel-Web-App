@@ -1,7 +1,7 @@
 import { React, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function BookDate() {
+function BookDate({ sendDataToParent }) {
     const [selectedCell, setSelectedCell] = useState(null);
     const [cellStatus, setCellStatus] = useState([])
 
@@ -194,9 +194,17 @@ function BookDate() {
     
             // Update the selected date
             setSelectedCell(cellId);
+
+            let row = cellId[1];
+            let column = cellId[3];
+
+            let hours = ["", "09:05", "10:00", "11:00", "12:00", "12:55", "13:50"];
+            let hour = hours[row];
+            let date = datesDisplayed[column-1].toISOString().slice(8, 10) + "." + datesDisplayed[column-1].toISOString().slice(5, 7) + "." + datesDisplayed[column-1].toISOString().slice(0, 4)
+
+            sendDataToParent([hour, date])
         }
     };
-    
 
     return (
         <div class="table-responsive-sm float-xxl-end">
