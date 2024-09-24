@@ -16,7 +16,8 @@ function Navbar() {
     news: '',
     songRequests: '',
     shoutouts: '',
-    about: ''
+    about: '',
+    schedule: ''
   })
 
   let location = useLocation();
@@ -28,7 +29,8 @@ function Navbar() {
         news: '',
         songRequests: '',
         shoutouts: '',
-        about: ''
+        about: '',
+        schedule: ''
       });
     } else if (location.pathname === '/aktualnosci') {
       updateNavLinksStyle({
@@ -36,7 +38,8 @@ function Navbar() {
         news: 'active',
         songRequests: '',
         shoutouts: '',
-        about: ''
+        about: '',
+        schedule: ''
       });
     } else if (location.pathname === '/zglos-piosenke') {
       updateNavLinksStyle({
@@ -44,7 +47,8 @@ function Navbar() {
         news: '',
         songRequests: 'active',
         shoutouts: '',
-        about: ''
+        about: '',
+        schedule: ''
       });
     } else if (location.pathname === '/dedykacje') {
       updateNavLinksStyle({
@@ -52,7 +56,8 @@ function Navbar() {
         news: '',
         songRequests: '',
         shoutouts: 'active',
-        about: ''
+        about: '',
+        schedule: ''
       });
     } else if (location.pathname === '/o-nas') {
       updateNavLinksStyle({
@@ -60,7 +65,17 @@ function Navbar() {
         news: '',
         songRequests: '',
         shoutouts: '',
-        about: 'active'
+        about: 'active',
+        schedule: ''
+      });
+    } else if (location.pathname === '/ramowka') {
+      updateNavLinksStyle({
+        main: '',
+        news: '',
+        songRequests: '',
+        shoutouts: '',
+        about: '',
+        schedule: 'active'
       });
     }
   }, [location.pathname]);
@@ -85,6 +100,11 @@ function Navbar() {
                       <li class="nav-item">
                         <Link to="/aktualnosci" style={linkStyle}>
                             <a class={"nav-link " + navLinksStyle['news']} href="#">Aktualności</a>
+                        </Link>
+                      </li>
+                      <li class="nav-item">
+                        <Link to="/ramowka" style={linkStyle}>
+                            <a class={"nav-link " + navLinksStyle['schedule']} href="#">Ramówka</a>
                         </Link>
                       </li>
                       <li class="nav-item">
