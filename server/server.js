@@ -10,7 +10,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Initialize the global state to store access and refresh tokens
-app.locals.code = "AQCXb-Tz7BEmoidjSArqsJnvetWcQk2Yh-6oJIDC4vVCy60tGBnH0BeDqJfKvH8rEXMMuHJILgQjxH9oKW4tsIMNdZg48VkZjNLbfQrxNDQz5zjnGphdDvdH6GgX9kNywMeb_saORiyOsX6SZUUT_2J6-IjoxVKw-dMYe5SomdSCbgGBUpqYODex0neghqH5VnYtJVEpLvqmqaxNl69jVC6_-lL6u478R0GRVRBuzr9GEQQf87jsBlePgPOY7G3BDRnnZnfZEBzqeLdFLoTP_TxvWuK2fjNYpndgr-ry2R30zXnzqwm8zWw-0uVMNDXAVsQyB73tRQMrrgIlFd4ed6QK2mSBKdTZg68fozQx2Y8DCcz1NmcAAIexqLxkTMeKAiu_";
 app.locals.accessToken = "";
 app.locals.refreshToken = "";
 app.locals.expiresIn = 0;
@@ -27,12 +26,21 @@ let currentSong = "";
 let currentSongImage = "";
 let currentSongAuthor = "";
 
+app.post('/sign_in', (req, res) => {
+  let login = req.body.login
+  let password = req.body.password
 
+  console.log(login + " & " + password)
+  res.send("Got it!")
+});
 
-
-app.get('/login', (req, res) => {
+app.get('/wfw', (req, res) => {
   res.redirect(spotifyApi.createAuthorizeURL(['user-read-private', 'user-read-email'], 'state'));
 });
+
+app.post('/authorize', (req, res) => {
+  
+})
 
 // Function to refresh the access token
 function refreshAccessToken() {
@@ -57,10 +65,8 @@ function refreshAccessToken() {
     });
 }
 
-function getAccessToken() {
-  const code = app.locals.code;
-
-  spotifyApi.authorizationCodeGrant(code).then((data) => {
+function getAccessToken(code) {
+    spotifyApi.authorizationCodeGrant(code).then((data) => {
     app.locals.accessToken = data.body.access_token;
     app.locals.refreshToken = data.body.refresh_token;
     app.locals.expiresIn = data.body.expires_in;
@@ -79,8 +85,6 @@ function getAccessToken() {
     res.sendStatus(400);
   });
 }
-
-
 
 //function to get currently played song title, image, author and time to an end and display it in console. Call this function again when song ends
 function getCurrentlyPlaying() {
@@ -109,16 +113,16 @@ function getCurrentlyPlaying() {
     });
 }
 
-
 //send currently playing song to user when requested
 app.get('/currentSong', (req, res) => {
-  res.json({ currentSong, currentSongImage, currentSongAuthor });
+  if (!app.locals.accessToken) {
+    res.send("Spotify API not initialized");
+  }
+  else {
+    res.json({ currentSong, currentSongImage, currentSongAuthor });
+  }
 });
-
-
-
 
 app.listen(3002, () => {
   console.log('Server running on http://localhost:3002');
-  getAccessToken();
 });
