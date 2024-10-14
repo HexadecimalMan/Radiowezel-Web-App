@@ -7,6 +7,7 @@ import Shoutouts from './pages/Shoutouts.js'
 import About from './pages/About.js'
 import News from './pages/News.js'
 import Schedule from './pages/Schedule.js'
+import Carousel from './pages/Carousel.js'
 
 import Login from './dashboard/Login.js'
 import Dashboard_Home from './dashboard/Home.js'
@@ -25,6 +26,7 @@ const Main = () => {
       <Route exact path='/o-nas' element={<About/>}></Route>
       <Route exact path='/aktualnosci' element={<News/>}></Route>
       <Route exact path='/ramowka' element={<Schedule/>}></Route>
+      <Route exact path='/informacje' element={<Carousel/>}></Route>
       <Route exact path='/login' element={<Login/>}></Route>
       <Route exact path='/dashboard/' element={<Dashboard_Home/>}></Route>
       <Route exact path='/dashboard/song-requests' element={<Dashboard_SongRequests/>}></Route>

@@ -18,7 +18,7 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://192.168.1.207:3002/sign_in", loginData);
+            const response = await axios.post("https://radiowezel-web-app.vercel.app/sign_in", loginData);
             console.log('Login data submitted successfully:', response.data);
         } catch (error) {
             console.error('Error submitting login data:', error);

@@ -6,19 +6,23 @@ import Navbar2 from './dashboard/Navbar'
 import Footer from './components/Footer'
 import { Route, Routes } from 'react-router-dom';
 
-
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/:any" element={<Navbar1 />}></Route>
-        <Route path="/dashboard/:any" element={<Navbar2 />}></Route>
-      </Routes>
-
-      <Main />
-      <Footer />
-    </div>
-  );
+  if (window.location.pathname == "/informacje") {
+    return (<div className="App"><Main /></div>)
+  }
+  else {
+    return (
+      <div className="App">
+        <Routes>
+          <Route path="/:any" element={<Navbar1 />}></Route>
+          <Route path="/dashboard/:any" element={<Navbar2 />}></Route>
+        </Routes>
+  
+        <Main />
+        <Footer />
+      </div>
+    );
+  }
 }
 
 export default App;

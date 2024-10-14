@@ -30,7 +30,7 @@ function Home() {
                 </svg>
                     <h2 class="fw-normal"><i><b>Co jest?</b></i></h2>
                     <p class="px-3">❗ Sprawdź co się dzieje - nadchodzące wydarzenia, najnowsze informacje oraz wieści prosto z anteny.</p>
-                    <p><Link to="/aktualnosci" style={linkStyle}><a class="btn btn-secondary" href="#">Zobacz artykuły &raquo;</a></Link></p>
+                    <p><a class="btn btn-secondary" href="/aktualnosci">Zobacz artykuły &raquo;</a></p>
                 </div>
                 <div class="col-lg-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="5rem" height="5rem" fill="currentColor" class="m-3 bi bi-boombox" viewBox="0 0 16 16">
@@ -41,7 +41,7 @@ function Home() {
                 </svg>
                     <h2 class="fw-normal"><i><b>Jakieś życzenia?</b></i></h2>
                     <p class="px-3">📨 Zgłoś piosenki, które ostatnio chodzą Ci po głowie. My dodamy je do naszej playlisty, a Ty wsłuchaj się w ich dźwięk w trakcie jednej z przerw.</p>
-                    <p><Link to="/zglos-piosenke" style={linkStyle}><a class="btn btn-secondary" href="#">Zobacz formularz &raquo;</a></Link></p>
+                    <p><a class="btn btn-secondary" href="/zglos-piosenke">Zobacz formularz &raquo;</a></p>
                 </div>
                 <div class="col-lg-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="5rem" height="5rem" fill="currentColor" class="m-3 bi bi-calendar-week-fill" viewBox="0 0 16 16">
@@ -49,7 +49,7 @@ function Home() {
                 </svg>
                     <h2 class="fw-normal"><i><b>Zamów dedykację</b></i></h2>
                     <p class="px-3">💌 "A teraz specjalnie na życzenie [...] utwór [...] dla [...] z okazji [...]!"</p>
-                    <p><Link to="/dedykacje" style={linkStyle}><a class="btn btn-secondary" href="#">Zarezerwuj termin &raquo;</a></Link></p>
+                    <p><a class="btn btn-secondary" href="/dedykacje">Zarezerwuj termin &raquo;</a></p>
                 </div>
             </div>
         </div>
