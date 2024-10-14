@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const fs = require("fs");
 const SpotifyWebApi = require('spotify-web-api-node');
 
 
@@ -123,57 +122,6 @@ app.get('/currentSong', (req, res) => {
     res.json({ currentSong, currentSongImage, currentSongAuthor });
   }
 });
-
-//post request to get Dedications containing song title, for whom, from whom, for what occasion and when
-app.get('/dedication', (req, res) => {
-  // Get query parameters from the request
-  let date = req.query.date;
-  let toWhom = req.query.toWhom;
-  let fromWhom = req.query.fromWhom;
-  let occasion = req.query.occasion;
-  let song = req.query.song;
-
-  let dedication = {
-    date: date,
-    toWhom: toWhom,
-    fromWhom: fromWhom,
-    occasion: occasion,
-    song: song
-  };
-
-  // Check if the file exists before reading
-  fs.readFile('dedications.json', 'utf8', (err, data) => {
-    let dedications = [];
-
-    // If there's an error (file doesn't exist) or the file is empty, we initialize an empty array
-    if (err || !data) {
-      console.log("File not found or is empty, initializing a new file.");
-    } else {
-      try {
-        dedications = JSON.parse(data); // Try parsing the existing file
-      } catch (parseError) {
-        console.error('Error parsing JSON, initializing with empty array:', parseError);
-      }
-    }
-
-    // Append the new dedication to the list
-    dedications.push(dedication);
-
-    // Write the updated list back to the JSON file
-    fs.writeFile('dedications.json', JSON.stringify(dedications, null, 2), (err) => {
-      if (err) {
-        console.error('Error writing to file', err);
-        return res.status(500).send('Server error');
-      }
-      
-      // Send a success response back to the client
-      res.send("Dedication received and saved!");
-    });
-  });
-});
-
-
-
 
 app.listen(3002, () => {
   console.log('Server running on http://localhost:3002');
