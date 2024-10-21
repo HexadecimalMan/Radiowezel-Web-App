@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import BookDate from '../components/BookDate';
@@ -102,6 +102,8 @@ function Shoutouts() {
         }
     }
 
+    document.title = "Dedykacje - Radiowęzeł";
+
     return (
         <div class="py-5 px-1 d-flex">
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
@@ -140,19 +142,14 @@ function Shoutouts() {
                                             <div class="modal-header">
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <ul class="nav nav-pills mt-4 mx-4 w-auto" id="pills-tab" role="tablist">
-                                                <li class="nav-item m-auto" role="presentation">
-                                                    <button class="nav-link active text-light bg-light-subtle border border-2 border-light rounded-circle" id="pills-1" data-bs-toggle="pill" type="button" role="tab" aria-controls="pills-home" aria-selected="true">1</button>
-                                                </li>
-                                                <li><div class="border border-light my-4 px-5"></div></li>
-                                                <li class="nav-item m-auto" role="presentation">
-                                                    <button class="nav-link text-dark bg-light border border-2 border-light rounded-circle" id="pills-2" data-bs-toggle="pill" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" disabled={false}>2</button>
-                                                </li>
-                                                <li><div class="border my-4 px-5"></div></li>
-                                                <li class="nav-item m-auto" role="presentation">
-                                                    <button class="nav-link text-white bg-tertiary border border-2 rounded-circle" id="pills-3" data-bs-toggle="pill" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" disabled={true}>3</button>
-                                                </li>
-                                            </ul>
+                                            <div class="position-relative m-5 mb-4">
+                                                <div class="progress" role="progressbar" aria-label="Progress" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style={{height: 2+"px"}}>
+                                                    <div class="progress-bar bg-light" style={{width: contentIndex*50 +'%'}}></div>
+                                                </div>
+                                                <button type="button" onClick={useEffect(() => {updateContent(0)})} class="position-absolute top-0 start-0 translate-middle btn btn-sm btn-light rounded-pill" style={{height: 2.5+"rem", width: 2.5+"rem"}}>1</button>
+                                                <button type="button" onClick={useEffect(() => {updateContent(1)})} class="position-absolute top-0 start-50 translate-middle btn btn-sm btn-light rounded-pill" style={{height: 2.5+"rem", width: 2.5+"rem"}}>2</button>
+                                                <button type="button" onClick={useEffect(() => {updateContent(2)})} class="position-absolute top-0 start-100 translate-middle btn btn-sm btn-light rounded-pill" style={{height: 2.5+"rem", width: 2.5+"rem"}}>3</button>
+                                            </div>
                                             <div class="tab-content" id="pills-tabContent">
                                                 { modalContent[contentIndex] }
                                             </div>

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SongSearch from '../components/SongSearch';
 
 function SongRequests() {
+    document.title = "Propozycje - Radiowęzeł";
     return (
         <div class="py-5 px-3 d-flex">
             <div class="row my-5 justify-content-center">

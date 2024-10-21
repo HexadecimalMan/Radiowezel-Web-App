@@ -7,6 +7,8 @@ function About() {
     const [flip, Flip] = useState(true)
     setTimeout(() => Flip(!flip), 1000)
 
+    document.title = "Informacje - Radiowęzeł";
+
     return (
         <div>
             <div class={"bg-secondary position-absolute container-fluid" + (!flip ? " z-0" : " z-1 fade-in")}>Slajd pierwszy</div>
