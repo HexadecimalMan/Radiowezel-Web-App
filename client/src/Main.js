@@ -13,6 +13,7 @@ import Login from './dashboard/Login.js'
 import Dashboard_Home from './dashboard/Home.js'
 import Dashboard_SongRequests from './dashboard/SongRequests.js'
 import Dashboard_Shoutouts from './dashboard/Shoutouts.js'
+import Dashboard_Schedule from './dashboard/Schedule.js'
 import Dashboard_About from './dashboard/About.js'
 import Dashboard_News from './dashboard/News.js'
 import Dashboard_Settings from './dashboard/Settings.js'
@@ -31,6 +32,7 @@ const Main = () => {
       <Route exact path='/dashboard/' element={<Dashboard_Home/>}></Route>
       <Route exact path='/dashboard/song-requests' element={<Dashboard_SongRequests/>}></Route>
       <Route exact path='/dashboard/shoutouts' element={<Dashboard_Shoutouts/>}></Route>
+      <Route exact path='/dashboard/schedule' element={<Dashboard_Schedule/>}></Route>
       <Route exact path='/dashboard/about' element={<Dashboard_About/>}></Route>
       <Route exact path='/dashboard/news' element={<Dashboard_News/>}></Route>
       <Route exact path='/dashboard/settings' element={<Dashboard_Settings/>}></Route>
