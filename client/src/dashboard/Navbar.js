@@ -14,7 +14,7 @@ function Navbar() {
         <header data-bs-theme="dark">
           <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
               <div class="container-fluid">
-                  <a class="navbar-brand" href="#">
+                  <a class="navbar-brand" href="/dashboard/">
                       <img style={{height: 3+'rem'}} src={logo}></img>
                   </a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,34 +23,25 @@ function Navbar() {
                   <div class="collapse navbar-collapse" id="navbarCollapse">
                       <ul class="navbar-nav me-auto mb-2 mb-md-0">
                       <li class="nav-item">
-                        <Link to="/dashboard" style={linkStyle}>
-                            <a class="nav-link active" aria-current="page" href="#">Strona główna</a>
-                        </Link>
+                        <a class="nav-link active" aria-current="page" href="/dashboard">Strona główna</a>
                       </li>
                       <li class="nav-item">
-                        <Link to="/dashboard/news" style={linkStyle}>
-                            <a class="nav-link" href="#">Aktualności</a>
-                        </Link>
+                        <a class="nav-link" href="/dashboard/news">Aktualności</a>
                       </li>
                       <li class="nav-item">
-                        <Link to="/dashboard/song-requests" style={linkStyle}>
-                            <a class="nav-link" href="#">Zgłoszone piosenki</a>
-                        </Link>
+                        <a class="nav-link" href="/dashboard/schedule">Ramówka</a>
                       </li>
                       <li class="nav-item">
-                        <Link to="/dashboard/shoutouts" style={linkStyle}>
-                            <a class="nav-link" href="#">Dedykacje</a>
-                        </Link>
+                        <a class="nav-link" href="/dashboard/song-requests">Zgłoszone piosenki</a>
                       </li>
                       <li class="nav-item">
-                        <Link to="/dashboard/about" style={linkStyle}>
-                            <a class="nav-link" href="#">O nas</a>
-                        </Link>
+                        <a class="nav-link" href="/dashboard/shoutouts">Dedykacje</a>
                       </li>
                       <li class="nav-item">
-                        <Link to="/dashboard/settings" style={linkStyle}>
-                            <a class="nav-link" href="#">Ustawienia</a>
-                        </Link>
+                        <a class="nav-link" href="/dashboard/about">O nas</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/settings">Ustawienia</a>
                       </li>
                       </ul>
                   </div>
