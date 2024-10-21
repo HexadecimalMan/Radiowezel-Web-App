@@ -7,8 +7,8 @@ import Footer from './components/Footer'
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  if (window.location.pathname == "/informacje") {
-    return (<div className="App"><Main /></div>)
+  if (window.location.pathname == "/informacje" || window.location.pathname == "/login") {
+    return (<div className="App"><Main /><Footer /></div>)
   }
   else {
     return (
@@ -17,7 +17,6 @@ function App() {
           <Route path="/:any" element={<Navbar1 />}></Route>
           <Route path="/dashboard/:any" element={<Navbar2 />}></Route>
         </Routes>
-  
         <Main />
         <Footer />
       </div>
