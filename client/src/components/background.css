@@ -1,0 +1,13 @@
+#bg-image {
+    filter: blur(50px);
+    transform: scale(3);
+}
+
+.bg-fade-in { 
+    animation: bg-fade-in 1s;
+  }
+
+@keyframes bg-fade-in {
+    0% { background-color: rgba(33,37,41,0); }
+    100% { background-color: rgba(33,37,41,255); }
+  }
